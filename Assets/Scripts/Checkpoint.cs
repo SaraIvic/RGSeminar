@@ -6,16 +6,18 @@ using UnityEngine.SceneManagement;
 public class Checkpoint : MonoBehaviour
 {
     private AudioSource checkpointSound;
-   
+    private bool levelCompleted = false;
+
     private void Start()
     {
         checkpointSound = GetComponent<AudioSource>();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.name == "Duck")
+        if(collision.gameObject.name == "Duck"  && !levelCompleted)
         {
             checkpointSound.Play();
+            levelCompleted = true;
             Invoke("CompleteLevel", 1f);
         }
     }
